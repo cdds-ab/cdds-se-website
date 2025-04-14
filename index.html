@@ -42,11 +42,12 @@
 
 </head>
 <body>
-  <div id="preloader" role="status" aria-live="polite" aria-label="Loading content">
-    <div class="loader"></div>
+  <div id="logo-fade">
+    <img src="images/cdds_logo.webp" alt="CDDS AB Logo">
   </div>
+
   <header>
-    <img src="images/cdds_logo.webp" alt="CDDS AB Logo – CDDS AB | DevOps | Continuous Delivery | Software Services & Consulting from Västernorrland, Sweden." width="1100" height="323" loading="eager" fetchpriority="high">
+    <img id="header-logo" src="images/cdds_logo.webp" alt="CDDS AB Logo – CDDS AB | DevOps | Continuous Delivery | Software Services & Consulting from Västernorrland, Sweden." width="1100" height="323" loading="eager" fetchpriority="high">
     <div class="qualities">
       <div>reliable.</div>
       <div>experienced.</div>
@@ -95,17 +96,52 @@
     CDDS - Continuous Delivery and DevOps Services AB | Org.nr: 559419-6593 | Krångvägen 40, 883 70 Ramsele |
     <a href="mailto:info@cdds.se">info@cdds.se</a>
   </footer>
+
   <script>
     document.body.classList.add('loading');
 
     window.addEventListener('load', () => {
-      const preloader = document.getElementById('preloader');
-      document.body.classList.remove('loading');
-
-      preloader.style.opacity = '0';
-      setTimeout(() => preloader.remove(), 600);
+      startIntroAnimation();
     });
+
+    function startIntroAnimation() {
+      document.body.classList.remove('loaded');
+      document.body.classList.add('loading');
+
+      const fade = document.getElementById('logo-fade');
+      if (fade) {
+        fade.classList.remove('hidden');  // falls per .hidden im DOM gesetzt
+        fade.classList.add('active');
+
+        // Logo neu animieren (wenn nötig)
+        const img = fade.querySelector('img');
+        if (img) {
+          img.style.animation = 'none';
+          void img.offsetWidth; // reflow triggern
+          img.style.animation = null;
+        }
+      }
+
+      setTimeout(() => {
+        document.body.classList.remove('loading');
+        document.body.classList.add('loaded');
+
+        if (fade) {
+          fade.classList.remove('active');
+        }
+      }, 2000);
+    }
+
+    const headerLogo = document.getElementById('header-logo');
+    if (headerLogo) {
+      headerLogo.style.cursor = 'pointer';
+      headerLogo.addEventListener('click', (e) => {
+        e.preventDefault();
+        startIntroAnimation();
+      });
+    }
   </script>
+
 </body>
 </html>
 
