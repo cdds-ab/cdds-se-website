@@ -42,8 +42,11 @@
 
 </head>
 <body>
+  <div id="preloader" role="status" aria-live="polite" aria-label="Loading content">
+    <div class="loader"></div>
+  </div>
   <header>
-    <img src="images/cdds_logo.webp" alt="CDDS AB Logo – CDDS AB | DevOps | Continuous Delivery | Software Services & Consulting from Västernorrland, Sweden." width="600" height="150" loading="eager" fetchpriority="high">
+    <img src="images/cdds_logo.webp" alt="CDDS AB Logo – CDDS AB | DevOps | Continuous Delivery | Software Services & Consulting from Västernorrland, Sweden." width="1100" height="323" loading="eager" fetchpriority="high">
     <div class="qualities">
       <div>reliable.</div>
       <div>experienced.</div>
@@ -60,7 +63,11 @@
         CDDS AB helps you <b>accelerate</b> your development and continuous delivery process — safer, faster, and more reliable. We focus on <b>automation</b> where useful, <b>quality</b> improvement and <b>complexity reduction</b>.
       </p>
       <p>
-        Ask us via mail: <a href="mailto:info@cdds.se">info@cdds.se</a>
+        Ask us via mail:
+        <a href="mailto:info@cdds.se">info@cdds.se</a>
+        <img src="https://flagcdn.com/16x12/gb.png" alt="English" class="flag-icon" loading="lazy">
+        <img src="https://flagcdn.com/16x12/de.png" alt="German" class="flag-icon" loading="lazy">
+        <img src="https://flagcdn.com/16x12/se.png" alt="Swedish" class="flag-icon" loading="lazy">
       </p>
     </div>
 
@@ -88,6 +95,17 @@
     CDDS - Continuous Delivery and DevOps Services AB | Org.nr: 559419-6593 | Krångvägen 40, 883 70 Ramsele |
     <a href="mailto:info@cdds.se">info@cdds.se</a>
   </footer>
+  <script>
+    document.body.classList.add('loading');
+
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      document.body.classList.remove('loading');
+
+      preloader.style.opacity = '0';
+      setTimeout(() => preloader.remove(), 600);
+    });
+  </script>
 </body>
 </html>
 
